@@ -361,14 +361,35 @@
                     <h1 class="h3 mb-4 text-gray-800">Crear nueva anotacion</h1>
                     
                     <div class="row">
-                        <div class="<div class="col-sm-6"></div>"></div> hay que llegar a probar a ver si funciona!!
+                        <div class="<div class="col-sm-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Registro de anotación negativa</h6>
                                 </div>
                                 <div class="card-body">
                                     <form method="post">
-                                        <div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="inputPassword6" class="col-form-label">Nombre Alumno: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="inputPassword6" class="col-form-label">Rut del Alumno: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-xs-12>
                                             <label for="nombre_alumno">Nombre del Alumno: </label>
                                             <input type="text" id="nombre_alumno" name="nombre_alumno" required>
                                         </div>
