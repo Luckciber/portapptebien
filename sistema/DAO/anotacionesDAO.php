@@ -6,13 +6,7 @@ class AnotacionesDAO {
         $this->pdo = $pdo;
     }
 
-    public function listarAnotaciones() {
-        $sql = "SELECT * FROM anotaciones";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
+    
 
     public function agregarAnotacion($id_alumno, $id_usuario, $fecha_creacion, $anotacion, $es_positiva) {
         
