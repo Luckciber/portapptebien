@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>BPLC</title>
+    <title>portAPPtebien</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -35,18 +35,16 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                                <img src="img/portapptebien-logo" alt="Logo" class="img-fluid" style="width: 350px; height: 350px;">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Te damos la bienvenida!</h1>
-                                    </div>
-                                    <div class="text-center">
-                                        <img src="img/logo.png" alt="Logo" class="img-fluid" style="width: 250px;
-                                                                                                    border-radius: 25px 25px 25px 25px;">
-                                    </div>
                                     <form action="sistema/BLL/login.php" method="POST" 
                                         class="user" style="margin-top: 20px;">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Te damos la bienvenida!</h1>
+                                        </div>
                                         <div class="form-group">
                                             <input type="text"
                                                 name="usuario"
@@ -73,10 +71,10 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="forgot-password.html">Olvidaste la Contraseña?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small" href="register.html">Create una Cuenta!</a>
                                     </div>
                                 </div>
                             </div>
