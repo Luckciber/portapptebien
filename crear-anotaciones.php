@@ -303,12 +303,12 @@
                                                 <label for="inputPassword6" class="col-form-label">Descripción: </label>
                                             </div>
                                             <div class="col-7">
-                                            <select class="form-select" aria-label="Default select example">
-                                            <option selected>Selecciona una opción</option>
-                                                <option value="disciplinaria">Disciplinaria</option>
-                                                <option value="academica">Académica</option>
-                                                <option value="convivencia">Convivencia</option>
-                                            </select>
+                                            <select class="form-control" aria-label="Default select example">
+                                                <option selected>Selecciona una opción</option>
+                                                    <option value="disciplinaria">Disciplinaria</option>
+                                                    <option value="academica">Académica</option>
+                                                    <option value="convivencia">Convivencia</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row g-3 align-items-center pb-2">
