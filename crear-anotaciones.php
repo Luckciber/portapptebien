@@ -31,11 +31,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">portAPPtebien<sup></sup></div>
+                <div class="sidebar-brand-text mx-3">portAPPtebien</div>
             </a>
 
             <!-- Divider -->
@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Inicio</span></a>
             </li>
@@ -61,13 +61,13 @@
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
                     aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Anotaciones Negativas</span>
+                    <span>Anotaciones</span>
                 </a>
                 <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item active" href="buttons.html">Crear nueva anotacion</a>
-                        <a class="collapse-item" href="cards.html">Ver anotacion</a>
+                        <a class="collapse-item active" href="crear-anotaciones.php">Crear nueva anotación</a>
+                        <a class="collapse-item" href="ver-anotaciones.php">Ver anotaciones</a>
                     </div>
                 </div>
             </li>
@@ -95,7 +95,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Addons
+                Herramientas
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -103,18 +103,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Administrador</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones de administrador:</h6>
+                        <a class="collapse-item" href="listar-profesores.php">Listado de Profesores</a>
+                        <a class="collapse-item" href="listar-alumnos.php">Listado de Alumnos</a>
                     </div>
                 </div>
             </li>
@@ -358,26 +353,24 @@
                 <div class="container-fluid">
                 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Crear nueva anotacion</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Crear una nueva anotación</h1>
                     
-                    <div class="row">
+                    <div class="row pb-2">
                         <div class="<div class="col-sm-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Registro de anotación negativa</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Registro de anotación</h6>
                                 </div>
                                 <div class="card-body">
                                     <form method="post">
                                         <div class="row g-3 align-items-center pb-2">
                                             <div class="col-5">
-                                                <label for="inputPassword6" class="col-form-label">Nombre Alumno: </label>
+                                                <label for="nombre" class="col-form-label">Nombre Alumno: </label>
                                             </div>
                                             <div class="col-7">
-                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                                <input type="text" id="name" class="form-control" aria-describedby="passwordHelpInline">
                                             </div>
                                         </div>
-
-
                                         <div class="row g-3 align-items-center pb-2">
                                             <div class="col-5">
                                                 <label for="inputPassword6" class="col-form-label">Rut del Alumno: </label>
@@ -386,95 +379,67 @@
                                                 <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
                                             </div>
                                         </div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="curso" class="col-form-label">Curso: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="inputPassword6" class="col-form-label">Fecha: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="date" id="date" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="asignatura" class="col-form-label">Asignatura: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
+                                        </div>
+                                        <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off" checked>
+                                        <label class="btn" for="option5">Anotación positiva</label>
 
-
-
-                                        <div class="col-xs-12>
-                                            <label for="nombre_alumno">Nombre del Alumno: </label>
-                                            <input type="text" id="nombre_alumno" name="nombre_alumno" required>
-                                        </div>
-                                        <div>
-                                            <label for="rut_alumno">RUT del Alumno: </label>
-                                            <input type="text" id="rut_alumno" name="rut_alumno" required>
-                                        </div>
-                                        <div>
-                                            <label for="curso_alumno">Curso:</label>
-                                            <input type="text" id="curso_alumno" name="curso_alumno" required>
-                                        </div>
-                                        <div>
-                                            <label for="fecha">Fecha:</label>
-                                            <input type="date" id="fecha" name="fecha" required>
-                                        </div>
-                                        <div>
-                                            <label for="asunto">Asunto:</label>
-                                            <input type="text" id="asunto" name="asunto" required>
-                                        </div>
-                                        <div>
-                                            <label for="descripcion">Descripción:</label>
-                                            <textarea id="descripcion" name="descripcion" rows="5" required></textarea>
-                                        </div>
-                                        <div>
-                                            <label for="categoria">Categoría:</label>
-                                            <select id="categoria" name="categoria">
+                                        <input type="radio" class="btn-check" name="options-base" id="option6" autocomplete="off">
+                                        <label class="btn" for="option6">Anotación negativa</label>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="inputPassword6" class="col-form-label">Descripción: </label>
+                                            </div>
+                                            <div class="col-7">
+                                            <select class="form-select" aria-label="Default select example">
+                                            <option selected>Selecciona una opción</option>
                                                 <option value="disciplinaria">Disciplinaria</option>
                                                 <option value="academica">Académica</option>
                                                 <option value="convivencia">Convivencia</option>
                                             </select>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <label for="apoderado">Apoderado:</label>
-                                            <input type="text" id="apoderado" name="apoderado">
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="asignatura" class="col-form-label">Apoderado: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
                                         </div>
-                                        <button type="submit">Guardar Anotación</button>
+                                        <div class="d-grid gap-3 d-md-block pb-2">
+                                            <button class="btn btn-primary" type="button">Guardar Anotación</button>
+                                            <button class="btn btn-secondary" type="button">Cancelar Anotación</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Acciones</h6>
-                            </div>
-                            <div class="card-body">
-                        
-                                <a href="#" class="btn btn-success btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <span class="text">Guardar anotación</span>
-                                </a>
-                                <div class="my-2"></div>
-                                <a href="#" class="btn btn-info btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-info-circle"></i>
-                                    </span>
-                                    <span class="text">Modificar informacion</span>
-                                </a>
-                                <div class="my-2"></div>
-                                <a href="#" class="btn btn-warning btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </span>
-                                    <span class="text">Generar citacion</span>
-                                </a>
-                                <div class="my-2"></div>
-                                <a href="#" class="btn btn-primary btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-flag"></i>
-                                    </span>
-                                    <span class="text">Generar reporte</span>
-                                </a>
-                                <div class="my-2"></div>
-                                <a href="#" class="btn btn-danger btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-trash"></i>
-                                    </span>
-                                    <span class="text">Eliminar anotación</span>
-                                </a>
-                            </div>
-                    </div>
-                
+                        </div>
+                        <h1 class="h3 mb-4 text-gray-800 Crear nueva anotacion positiva"></h1>
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 
