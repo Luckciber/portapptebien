@@ -1,7 +1,7 @@
 <?php
     interface IAnotaciones{
 
-        public function listarAnotacionesPorCurso();
+        public function listarAnotacionesPorCurso($id_curso);
     }
 
 ?>

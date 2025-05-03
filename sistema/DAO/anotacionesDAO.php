@@ -85,7 +85,7 @@ class AnotacionesDAO {
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':id_anotacion', $id_anotacion);
-            $stmt->bindParam(':es_positiva', $es_positiva);
+            //$stmt->bindParam(':es_positiva', $es_positiva);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
