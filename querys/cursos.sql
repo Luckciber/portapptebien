@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `cursos` (
 -- Volcado de datos para la tabla `cursos`
 --
 
-INSERT INTO `cursos` (`id_cursos`, `año`) VALUES
+INSERT INTO `cursos` (`id_cursos`, `descripcion`) VALUES
 (1, '1°basico'),
 (2, '2°basico'),
 (3, '3°basico'),
