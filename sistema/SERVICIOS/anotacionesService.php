@@ -9,6 +9,10 @@ class AnotacionesService implements IAnotaciones{
     public function __construct($pdo) {
         $this->anotacionesDao = new AnotacionesDao($pdo);
     }
+  
+    public function listarAnotacionesPorCurso(){
+       return $this->anotacionesDAO->listarAnotacionesPorCurso(1);     
+    }
 
     public function agregarAnotacion($id_alumno, $id_usuario, $fecha_creacion, $anotacion, $es_positiva) {
         return $this->anotacionesDao->agregarAnotacion($id_alumno, $id_usuario, $fecha_creacion, $anotacion, $es_positiva);
@@ -30,7 +34,4 @@ class AnotacionesService implements IAnotaciones{
         return $this->anotacionesDao->actualizarAnotacion($id_anotacion, $anotacion, $es_positiva);
     }
 }
-
-
-
 ?>

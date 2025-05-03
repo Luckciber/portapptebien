@@ -17,6 +17,13 @@ function listarAnotaciones() {
         return json_encode(array("error" => "No se encontraron resultados."));
     }
 }
+
+function ListarAnotacionesPorCurso(){
+    require_once __DIR__.'\..\SERVICIOS/anotacionesService.php';
+    require_once __DIR__.'\..\conexion.php';
+    $anotaciones = new AnotacionesService($pdo);
+    return json_encode( $anotaciones->listarAnotacionesPorCurso());
+}
 function eliminarAnotacion($id_anotacion) {
     require_once __DIR__ . '/../SERVICIOS/anotacionesService.php';
     session_start();
