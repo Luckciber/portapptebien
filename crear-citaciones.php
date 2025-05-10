@@ -27,7 +27,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-       <?php require_once 'menu.php'; ?>
+        <?php require_once "menu.php"; ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -241,89 +241,91 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Anotaciones</h1>
-                    </div>
-
-                    <div class="row">
-
-                        <!-- Earnings (Annual) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Anotaciones Positivas</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-check fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+                    <h1 class="h3 mb-4 text-gray-800">Crear una nueva citacion</h1>
+                    
+                    <div class="row pb-2">
+                        <div class="<div class="col-sm-6">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Registro de citaciones</h6>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Tasks Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Anotaciones Negativas
+                                    <form method="post">
+                                    <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="inputPassword6" class="col-form-label">Rut del Alumno: </label>
                                             </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">2</div>
-                                                </div>
+                                            <div class="col-7">
+                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
                                             </div>
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-times fa-2x text-gray-300"></i>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="nombre" class="col-form-label">Nombre Alumno: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text" id="name" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="asignatura" class="col-form-label">Nombre Apoderado: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="curso" class="col-form-label">Curso: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="creationDate" class="col-form-label">Fecha creacion:</label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="date" id="creationDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="inputPassword6" class="col-form-label">Fecha citacion:</label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="date" id="date" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                        <div class="input-group-prepend col-5">
+                                            <label for="nombre" class="col-form-label">Estado:</label>
+                                        </div>
+                                        <div class="col-7">
+                                           <select class="custom-select" id="inputGroupSelect01">
+                                                <option selected>Seleccione...</option>
+                                                <option value="1">Pendiente</option>
+                                                <option value="2">Confirmada</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        <div class="d-grid gap-4 d-md-block pb-2">
+                                            <button class="btn btn-primary" type="button">Guardar Citacion</button>
+                                            <button class="btn btn-secondary" type="button">Cancelar Citacion</button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Detalles de Anotaciones</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>anotacion</th>
-                                            <th>Es positiva</th>
-                                            <th>F. creación</th>
-                                            <th>Profesor</th>
-                                            <th>Rut de Alumno</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
+                 
+            </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->

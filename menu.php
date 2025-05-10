@@ -52,9 +52,8 @@
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html">Crear citacion</a>
-            <a class="collapse-item" href="utilities-border.html">Actualizar citacion</a>
-            <a class="collapse-item" href="utilities-animation.html">Eliminar citacion</a>
+            <a class="collapse-item" href="crear-citaciones.php">Crear citacion</a>
+            <a class="collapse-item" href="ver-citaciones.php">Actualizar citacion</a>
             <a class="collapse-item" href="utilities-other.html">Reportes</a>
         </div>
     </div>
@@ -105,13 +104,5 @@
 <div class="text-center d-none d-md-inline">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>
 </div>
-
-<!-- Sidebar Message -->
-<div class="sidebar-card d-none d-lg-flex">
-    <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-    <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-</div>
-
 </ul>
 <!-- End of Sidebar -->
