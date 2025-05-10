@@ -2,7 +2,7 @@
 class CitacionesDao {
     private $pdo;
 
-    public funtion __construct($pdo) {
+    public function __construct($pdo) {
         $this->pdo = $pdo;
     }
 
@@ -10,8 +10,7 @@ class CitacionesDao {
         $sql = "INSERT INTO citaciones (rut_alumno, rut_apoderado ,id_usuario, fecha_creacion, motivo, fecha_citacion) VALUES (:rut_alumno, :rut_apoderado, :id_usuario, :fecha_creacion, :motivo, :fecha_citacion)";
         try {
             $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':rut_alumno', $rut_alumno);
-            $stmt->bindParam(':rut_apoderado', $rut_apoderado);
+            $stmt->bindParam(':rut_alumno', $id_alumno);
             $stmt->bindParam(':id_usuario', $id_usuario);
             $stmt->bindParam(':fecha_creacion', $fecha_creacion);
             $stmt->bindParam(':motivo', $motivo);
