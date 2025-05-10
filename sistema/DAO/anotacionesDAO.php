@@ -30,8 +30,8 @@ class AnotacionesDAO {
             
         try {
             $sql="select * from apoderados;";
-            $stml = $this->pdo->prepare($sql); // no entiendo 
-           // $stml ->bindParam(':id_curso', $id_curso);
+            $stml = $this->pdo->prepare($sql);
+            $stml ->bindParam(':id_curso', $id_curso);
             $stml ->execute();
            return $stml->fetchAll(PDO::FETCH_ASSOC);
         }catch (PDOException $e){

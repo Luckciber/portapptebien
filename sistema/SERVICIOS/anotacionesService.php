@@ -11,7 +11,7 @@ class AnotacionesService implements IAnotaciones{
     }
   
     public function listarAnotacionesPorCurso(){
-       return $this->anotacionesDAO->listarAnotacionesPorCurso(1);     
+       return $this->anotacionesDao->listarAnotacionesPorCurso(1);     
     }
 
     public function agregarAnotacion($id_alumno, $id_usuario, $fecha_creacion, $anotacion, $es_positiva) {

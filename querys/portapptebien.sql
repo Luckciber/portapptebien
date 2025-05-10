@@ -276,3 +276,23 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+<<<<<<< Updated upstream
+=======
+--
+-- Tabla anotaciones
+--
+
+DROP TABLE IF EXISTS `anotaciones`;
+CREATE TABLE anotaciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,  
+    anotacion TEXT NOT NULL,             
+    es_positiva BOOLEAN NOT NULL,       
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    id_usuario INT NOT NULL, 
+    id_alumno INT NOT NULL, 
+    FOREIGN KEY (id_usuario) REFERENCES usuario(usuario), 
+    FOREIGN KEY (id_alumno) REFERENCES alumnos(rut) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+>>>>>>> Stashed changes

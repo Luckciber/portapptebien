@@ -2,7 +2,10 @@
 require 'sistema/conexion.php';
 
 
-$sql = "SELECT rut, nombre, apellido_paterno, apellido_materno FROM alumnos ORDER BY rut ASC";
+$sql1 = "SELECT rut, nombre, apellido_paterno, apellido_materno FROM alumnos ORDER BY rut ASC";
+$sql2 = "SELECT usuario , permiso FROM usuario ORDER BY permiso ASC ";// query para listar USUARIO
+$sql3 = "SELECT rut , nombre apellido_materno , apellido_paterno FROM apoderados ORDER BY rut ASC "; // query para listar apoderados 
+// SE PUEDE TENER MAS DE UNA VARIABLE SQL EN LA MISMA HOJA DE TRABAJO ???
 
 ?>
 <!DOCTYPE html>
