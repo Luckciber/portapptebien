@@ -7,7 +7,7 @@
         }
 
         public function listarApoderados() {
-            $sql = "SELECT * FROM apoderados";
+            $sql = "SELECT rut , nombre , apellido_materno , apellido_paterno FROM apoderados ORDER BY rut ASC ";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -1,11 +1,12 @@
 <?php
-require 'sistema/conexion.php';
+require 'sistema/BLL/apoderados.php';
+
+$listarapoderado = listarApoderados();
 
 
-$sql1 = "SELECT rut, nombre, apellido_paterno, apellido_materno FROM alumnos ORDER BY rut ASC";
+
+$sql = "SELECT rut, nombre, apellido_paterno, apellido_materno FROM alumnos ORDER BY rut ASC";
 $sql2 = "SELECT usuario , permiso FROM usuario ORDER BY permiso ASC ";// query para listar USUARIO
-$sql3 = "SELECT rut , nombre apellido_materno , apellido_paterno FROM apoderados ORDER BY rut ASC "; // query para listar apoderados 
-// SE PUEDE TENER MAS DE UNA VARIABLE SQL EN LA MISMA HOJA DE TRABAJO ???
 
 ?>
 <!DOCTYPE html>
@@ -364,12 +365,12 @@ $sql3 = "SELECT rut , nombre apellido_materno , apellido_paterno FROM apoderados
                 <!-- End of Topbar -->
     <div class="container-fluid">
 
-                    <h1 class="h3 mb-2 text-gray-800">Tabla de Alumnos</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Tabla de Apoderados</h1>
                     <p class="mb-4">Datos cargados desde la base de datos</p>
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Listado de Alumnos</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Listado de Apoderados</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -393,18 +394,24 @@ $sql3 = "SELECT rut , nombre apellido_materno , apellido_paterno FROM apoderados
                                     <tbody>
                                         <?php
                                         try {
-                                            $stmt = $pdo->query($sql);
 
-                                            $encontrado = false;
-                                            while ($fila = $stmt->fetch()) {
-                                                $encontrado = true;
-                                                echo "<tr>";
-                                                echo "<td>" . htmlspecialchars($fila["rut"] ?? '') . "</td>";
-                                                echo "<td>" . htmlspecialchars($fila["nombre"] ?? '') . "</td>";
-                                                echo "<td>" . htmlspecialchars($fila["apellido_paterno"] ?? '') . "</td>";
-                                                echo "<td>" . htmlspecialchars($fila["apellido_materno"] ?? '') . "</td>";
+
+                                            foreach(json_decode($listarapoderado) as $apoderado){
+                                                    $rut = $apoderado->rut;
+                                                    $nombre = $apoderado->nombre;
+                                                    $apellido_paterno = $apoderado->apellido_paterno;
+                                                    $apellido_materno = $apoderado->apellido_materno; 
+                                                    ?>
+                                            <tr>
+                                                <td><?php echo $rut; ?></td>
+                                                <td><?php echo $nombre; ?></td>
+                                                <td><?php echo $apellido_paterno; ?></td>
+                                                <td><?php echo $apellido_materno; ?></td>
+                                            </tr>
+                                                    <?php
                                             }
-                                            if (!$encontrado) {
+
+                                            if (!json_decode($listarapoderado)) {
                                                 echo "<tr><td colspan='6'>No se encontraron registros en la base de datos.</td></tr>";
                                             }
 
