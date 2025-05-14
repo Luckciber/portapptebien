@@ -8,7 +8,7 @@
         }
 
         public function listarPermisos() {
-            $sql = "SELECT usuario,permiso, descripcion FROM usuario,permisos WHERE usuario.permiso = permisos.id";
+            $sql = "SELECT usuario , permiso FROM usuario ORDER BY permiso ASC ";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -6,7 +6,7 @@ $listarapoderado = listarApoderados();
 
 
 $sql = "SELECT rut, nombre, apellido_paterno, apellido_materno FROM alumnos ORDER BY rut ASC";
-$sql2 = "SELECT usuario , permiso FROM usuario ORDER BY permiso ASC ";// query para listar USUARIO
+
 
 ?>
 <!DOCTYPE html>

@@ -15,5 +15,5 @@
         $permisos = $permisosService->obtenerPermiso($usuario);
         return json_encode($permisos);
     }
-
+    
 ?>
