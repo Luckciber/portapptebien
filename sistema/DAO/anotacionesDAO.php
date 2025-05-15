@@ -33,7 +33,7 @@ class AnotacionesDAO {
             $stml = $this->pdo->prepare($sql);
             $stml ->bindParam(':id_curso', $id_curso);
             $stml ->execute();
-           return $stml->fetchAll(PDO::FETCH_ASSOC);
+            return $stml->fetchAll(PDO::FETCH_ASSOC);
         }catch (PDOException $e){
             error_log("Error en buscarAnotaciones:" . $e->getMessage());
             return false;

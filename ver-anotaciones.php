@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -27,7 +28,14 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-       <?php require_once 'menu.php'; ?>
+    <?php require_once 'menu.php'; 
+    require 'sistema/conexion.php';
+    require_once 'sistema/BLL/anotaciones.php';
+
+    $anotacionesJSON = obtenerTodasLasAnotaciones();
+    $anotaciones = json_decode($anotacionesJSON, true);
+    
+    ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -307,16 +315,33 @@
                                             <th>Rut de Alumno</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tfoot>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <th>ID</th>
+                                            <th>anotacion</th>
+                                            <th>Es positiva</th>
+                                            <th>F. creación</th>
+                                            <th>Profesor</th>
+                                            <th>Rut de Alumno</th>
                                         </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <?php
+                                        if (isset($anotaciones['error'])) {
+                                            echo "<tr><td colspan='6'>" . $anotaciones['error'] . "</td></tr>";
+                                        } else {
+                                            foreach ($anotaciones as $anotacion) {
+                                                echo "<tr>";
+                                                echo "<td>" . htmlspecialchars($anotacion['id']) . "</td>";
+                                                echo "<td>" . htmlspecialchars($anotacion['anotacion']) . "</td>";
+                                                echo "<td>" . ($anotacion['es_positiva'] ? 'Sí' : 'No') . "</td>";
+                                                echo "<td>" . htmlspecialchars($anotacion['fecha_creacion']) . "</td>";
+                                                echo "<td>" . htmlspecialchars($anotacion['id_usuario']) . "</td>";
+                                                echo "<td>" . htmlspecialchars($anotacion['id_alumno']) . "</td>";
+                                                echo "</tr>";
+                                            }
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -376,6 +401,17 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="js/demo/datatables-demo.js"></script> </body>
 
 </body>
 
