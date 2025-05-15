@@ -1,51 +1,51 @@
 <?php
-function agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
-    require_once __DIR__ . '/../DAO/citacionesDAO.php';
-    session_start();
-    $citacionesDao = new CitacionesDao($pdo);
-    return $citacionesDao->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
-}
-function listarCitaciones() {
-    require_once __DIR__ . '/../DAO/citacionesDAO.php';
-    session_start();
-    $citacionesDao = new CitacionesDao($pdo);
-    $allCitaciones = $citacionesDao->listarCitaciones();
+require_once __DIR__.'\..\SERVICIOS\citacionesService.php';
+require_once __DIR__.'\..\conexion.php';
 
-    if ($allCitaciones) {
-        return json_encode($allCitaciones);
+function agregarNuevaCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
+    global $pdo;
+    $citacionesService = new CitacionesService($pdo);
+    return $citacionesService->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
+}
+
+function obtenerTodasLasCitaciones() {
+    global $pdo;
+    $citacionesService = new CitacionesService($pdo);
+    $citaciones = $citacionesService->listarCitaciones();
+    if ($citaciones) {
+        return json_encode($citaciones);
     } else {
-        return json_encode(array("error" => "No se encontraron resultados."));
+        return json_encode(array("error" => "No se encontraron citaciones."));
     }
 }
-function eliminarCitacion($id_citacion) {
-    require_once __DIR__ . '/../DAO/citacionesDAO.php';
-    session_start();
-    $citacionesDao = new CitacionesDao($pdo);
-    return $citacionesDao->eliminarCitacion($id_citacion);
-}
-function obtenerCitacion($id_citacion) {
-    require_once __DIR__ . '/../DAO/citacionesDAO.php';
-    session_start();
-    $citacionesDao = new CitacionesDao($pdo);
-    return $citacionesDao->obtenerCitacion($id_citacion);
-}
-function listarCitacionesPorAlumno($rut_alumno) {
-    require_once __DIR__ . '/../DAO/citacionesDAO.php';
-    session_start();
-    $citacionesDao = new CitacionesDao($pdo);
-    $allCitaciones = $citacionesDao->listarCitacionesPorAlumno($rut_alumno);
 
-    if ($allCitaciones) {
-        return json_encode($allCitaciones);
+function eliminarCitacionPorId($id_citacion) {
+    global $pdo;
+    $citacionesService = new CitacionesService($pdo);
+    return $citacionesService->eliminarCitacion($id_citacion);
+}
+
+function obtenerCitacionPorId($id_citacion) {
+    global $pdo;
+    $citacionesService = new CitacionesService($pdo);
+    return $citacionesService->obtenerCitacion($id_citacion);
+}
+
+function obtenerCitacionesPorAlumno($rut_alumno) {
+    global $pdo;
+    $citacionesService = new CitacionesService($pdo);
+    $citaciones = $citacionesService->listarCitacionesPorAlumno($rut_alumno);
+    if ($citaciones) {
+        return json_encode($citaciones);
     } else {
-        return json_encode(array("error" => "No se encontraron resultados."));
+        return json_encode(array("error" => "No se encontraron citaciones para el alumno con RUT: " . $rut_alumno));
     }
 }
-function actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
-    require_once __DIR__ . '/../DAO/citacionesDAO.php';
-    session_start();
-    $citacionesDao = new CitacionesDao($pdo);
-    return $citacionesDao->actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
+
+function actualizarDatosCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
+    global $pdo;
+    $citacionesService = new CitacionesService($pdo);
+    return $citacionesService->actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
 }
 
 ?>
