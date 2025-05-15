@@ -1,44 +1,49 @@
 <?php
-function agregarAnotacion($id_alumno, $id_usuario, $fecha_creacion, $anotacion, $es_positiva) {
-    require_once __DIR__ . '/../SERVICIOS/anotacionesService.php';
-    session_start();
+require_once __DIR__.'\..\SERVICIOS\anotacionesService.php';
+require_once __DIR__.'\..\conexion.php';
+
+function agregarNuevaAnotacion($id_alumno, $id_usuario, $fecha_creacion, $anotacion, $es_positiva) {
+    global $pdo;
     $anotacionesService = new AnotacionesService($pdo);
     return $anotacionesService->agregarAnotacion($id_alumno, $id_usuario, $fecha_creacion, $anotacion, $es_positiva);
 }
-function listarAnotaciones() {
-    require_once __DIR__ . '/../SERVICIOS/anotacionesService.php';
-    session_start();
+
+function obtenerAnotacionesPorCurso($id_curso) {
+    global $pdo;
     $anotacionesService = new AnotacionesService($pdo);
-    $allAnotaciones = $anotacionesService->listarAnotaciones();
-    
-    if ($allAnotaciones) {
-        return json_encode($allAnotaciones);
+    $anotaciones = $anotacionesService->listarAnotacionesPorCurso($id_curso);
+    if ($anotaciones) {
+        return json_encode($anotaciones);
     } else {
-        return json_encode(array("error" => "No se encontraron resultados."));
+        return json_encode(array("error" => "No se encontraron anotaciones para el curso con ID: " . $id_curso));
     }
 }
 
-function ListarAnotacionesPorCurso(){
-    require_once __DIR__.'\..\SERVICIOS/anotacionesService.php';
-    require_once __DIR__.'\..\conexion.php';
-    $anotaciones = new AnotacionesService($pdo);
-    return json_encode( $anotaciones->listarAnotacionesPorCurso());
+function obtenerTodasLasAnotaciones() {
+    global $pdo;
+    $anotacionesService = new AnotacionesService($pdo);
+    $anotaciones = $anotacionesService->listarAnotaciones();
+    if ($anotaciones) {
+        return json_encode($anotaciones);
+    } else {
+        return json_encode(array("error" => "No se encontraron anotaciones."));
+    }
 }
-function eliminarAnotacion($id_anotacion) {
-    require_once __DIR__ . '/../SERVICIOS/anotacionesService.php';
-    session_start();
+
+function eliminarAnotacionPorId($id_anotacion) {
+    global $pdo;
     $anotacionesService = new AnotacionesService($pdo);
     return $anotacionesService->eliminarAnotacion($id_anotacion);
 }
-function obtenerAnotacion($id_anotacion) {
-    require_once __DIR__ . '/../SERVICIOS/anotacionesService.php';
-    session_start();
+
+function obtenerAnotacionPorId($id_anotacion) {
+    global $pdo;
     $anotacionesService = new AnotacionesService($pdo);
     return $anotacionesService->obtenerAnotacion($id_anotacion);
 }
-function actualizarAnotacion($id_anotacion, $anotacion, $es_positiva) {
-    require_once __DIR__ . '/../SERVICIOS/anotacionesService.php';
-    session_start();
+
+function actualizarDatosAnotacion($id_anotacion, $anotacion, $es_positiva) {
+    global $pdo;
     $anotacionesService = new AnotacionesService($pdo);
     return $anotacionesService->actualizarAnotacion($id_anotacion, $anotacion, $es_positiva);
 }

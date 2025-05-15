@@ -53,7 +53,7 @@
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="crear-citaciones.php">Crear citacion</a>
-            <a class="collapse-item" href="ver-citaciones.php">Actualizar citacion</a>
+            <a class="collapse-item" href="ver-citaciones.php">Ver Citaciones</a>
             <a class="collapse-item" href="utilities-other.html">Reportes</a>
         </div>
     </div>

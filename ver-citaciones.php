@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -27,7 +28,32 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-       <?php require_once 'menu.php'; ?>
+    <?php
+    // Incluye el archivo 'menu.php'. Se espera que este archivo contenga código HTML y/o PHP para generar el menú de navegación de la página.
+    require_once 'menu.php';
+
+    // Incluye el archivo 'conexion.php'. Este archivo probablemente contiene el código para establecer una conexión con la base de datos utilizando PDO (PHP Data Objects). La conexión se almacenará en una variable (generalmente $pdo).
+    require 'sistema/conexion.php';
+
+    // Incluye el archivo 'citaciones.php' que se encuentra en la carpeta 'sistema/BLL/'. Este archivo contiene la capa de la Lógica de Negocio (BLL) para las citaciones, incluyendo la función 'obtenerTodasLasCitaciones()'.
+    require_once 'sistema/BLL/citaciones.php';
+
+    // Llama a la función 'obtenerTodasLasCitaciones()' que está definida en el archivo 'citaciones.php'.
+    // Se espera que esta función interactúe con la capa de Servicios y el DAO para obtener todos los datos de las citaciones desde la base de datos y los devuelva en formato JSON.
+    $citacionesJSON = obtenerTodasLasCitaciones();
+
+    // Decodifica la cadena JSON obtenida en el paso anterior ($citacionesJSON) a un array asociativo de PHP.
+    // El segundo parámetro 'true' asegura que el objeto JSON se decodifique como un array asociativo en lugar de un objeto estándar de PHP.
+    $citaciones = json_decode($citacionesJSON, true);
+
+    // A partir de este punto, la variable '$citaciones' contendrá un array de PHP con los datos de las citaciones.
+    // Si la función 'obtenerTodasLasCitaciones()' devolvió un JSON con un error (como vimos anteriormente),
+    // '$citaciones' será un array asociativo con una clave 'error'. Si no hubo error, será un array de arrays asociativos,
+    // donde cada array interno representa una fila de la tabla 'citaciones'.
+
+    // El resto del código de la página (que vimos anteriormente en 'ver-citaciones.php') utilizará este array '$citaciones'
+    // para mostrar la información en la tabla HTML.
+    ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -249,7 +275,7 @@
 
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Pendientes Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
@@ -267,7 +293,7 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Annual) Card Example -->
+                        <!-- Confirmadas Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -285,14 +311,14 @@
                             </div>
                         </div>
 
-                        <!-- Tasks Card Example -->
+                        <!-- Canceladas Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Canceladas
-                                            </div>
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                Canceladas</div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">2</div>
@@ -307,7 +333,7 @@
                             </div>
                         </div>
 
-                        <!-- Pending Requests Card Example -->
+                        <!-- Finalizadas Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
@@ -326,46 +352,62 @@
                         </div>
                     </div>
 
+                    <!-- Detalles de citaciones -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Detalles de citaciones</h6>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>F. creación</th>
-                                            <th>F. citacion</th>
-                                            <th>Nombre de Alumno</th>
-                                            <th>Nombre de Apoderado</th>
-                                            <th>Estado</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                            <button type="button" class="btn btn-warning">Editar</button>
-                                            <button type="button" class="btn btn-success">Guardar</button>
-                                            <button type="button" class="btn btn-danger">Eliminar</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="container-fluid">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>ID Citación</th>
+                                                <th>Rut Alumno</th>
+                                                <th>Rut Apoderado</th>
+                                                <th>ID Usuario</th>
+                                                <th>Fecha Creación</th>
+                                                <th>Motivo</th>
+                                                <th>Fecha Citación</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID Citación</th>
+                                                <th>Rut Alumno</th>
+                                                <th>Rut Apoderado</th>
+                                                <th>ID Usuario</th>
+                                                <th>Fecha Creación</th>
+                                                <th>Motivo</th>
+                                                <th>Fecha Citación</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <?php
+                                            if (isset($citaciones) && is_array($citaciones)) {
+                                                foreach ($citaciones as $citacion) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . htmlspecialchars($citacion['id_citacion']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($citacion['rut_alumno']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($citacion['rut_apoderado']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($citacion['id_usuario']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($citacion['fecha_creacion']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($citacion['motivo']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($citacion['fecha_citacion']) . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='7'>No hay citaciones disponibles.</td></tr>";
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
-            <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -419,5 +461,16 @@
     <script src="js/sb-admin-2.min.js"></script>
 
 </body>
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="js/demo/datatables-demo.js"></script> </body>
 
 </html>
