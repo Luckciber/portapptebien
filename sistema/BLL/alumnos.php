@@ -1,14 +1,15 @@
 <?php
+require_once __DIR__.'\..\SERVICIOS\alumnosService.php';
+require_once __DIR__.'\..\conexion.php';
     function listarAlumnos(){
-        require_once __DIR__.'\..\SERVICIOS\alumnosService.php';
-        session_start();
+        global $pdo;
         $alumnosService = new AlumnosService($pdo);
-        $allAlumnos = $alumnosService->listarAlumnos();
+        $anotaciones = $alumnosService->listarAlumnos();
+        $alumnosService = new AlumnosService($pdo);
+        $alumnos = $alumnosService->listarAlumnos();
         
-        if ($allAlumnos) {
-            // Aquí puedes procesar los datos del inventario y mostrarlos en la vista
-            // Por ejemplo, podrías convertirlo a JSON o renderizarlo en una tabla HTML
-            return json_encode($allAlumnos);
+        if ($alumnos) {
+            return json_encode($alumnos);
         } else {
             return json_encode(array("error" => "No se encontraron resultados."));
         }
