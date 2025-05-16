@@ -2,6 +2,14 @@
 require_once __DIR__.'\..\SERVICIOS\citacionesService.php';
 require_once __DIR__.'\..\conexion.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['guardar_citacion'])) {
+        echo $_POST["nombreapoderado"];
+        crearCitacion();
+    }
+}
+
+
 function agregarNuevaCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
     global $pdo;
     $citacionesService = new CitacionesService($pdo);
@@ -47,5 +55,12 @@ function actualizarDatosCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_
     $citacionesService = new CitacionesService($pdo);
     return $citacionesService->actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
 }
+
+function crearCitacion() {
+  echo "Llegue";
+}
+
+
+
 
 ?>

@@ -1,10 +1,8 @@
 <?php
-require_once __DIR__.'\..\SERVICIOS\alumnosService.php';
-require_once __DIR__.'\..\conexion.php';
+
     function listarAlumnos(){
-        global $pdo;
-        $alumnosService = new AlumnosService($pdo);
-        $anotaciones = $alumnosService->listarAlumnos();
+        require_once __DIR__.'\..\SERVICIOS\alumnosService.php';
+        include __DIR__.'\..\conexion.php';
         $alumnosService = new AlumnosService($pdo);
         $alumnos = $alumnosService->listarAlumnos();
         
