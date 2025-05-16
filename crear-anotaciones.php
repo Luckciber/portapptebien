@@ -282,7 +282,7 @@
                                                 <label for="inputPassword6" class="col-form-label">Fecha: </label>
                                             </div>
                                             <div class="col-7">
-                                            <input type="date" id="creationDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+                                                <input type="date" id="date" class="form-control" aria-describedby="passwordHelpInline">
                                             </div>
                                         </div>
                                         <div class="row g-3 align-items-center pb-2">

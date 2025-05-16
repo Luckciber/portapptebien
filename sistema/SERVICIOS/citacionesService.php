@@ -10,8 +10,8 @@ class CitacionesService implements ICitacion {
         $this->citacionesDao = new CitacionesDao($pdo);
     }
 
-    public function agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
-        return $this->citacionesDao->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
+    public function agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion, $siguiente_cita) {
+        return $this->citacionesDao->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion, $siguiente_cita);
     }
 
     public function listarCitaciones() {
@@ -32,6 +32,14 @@ class CitacionesService implements ICitacion {
 
     public function actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
         return $this->citacionesDao->actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
+    }
+
+    public function obtenerUltimaCitacion() {
+        return $this->citacionesDao->obtenerUltimaCitacion();
+    }
+
+    public function listarEstadosCitacion() {
+        return $this->citacionesDao->listarEstadosCitacion();
     }
 }
 ?>
