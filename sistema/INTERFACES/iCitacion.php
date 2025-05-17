@@ -8,6 +8,7 @@ interface ICitacion {
     public function actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
     public function obtenerUltimaCitacion();
     public function listarEstadosCitacion();
+    public function obtenerTodasLasCitaciones();
 }
 
 ?>

@@ -5,10 +5,13 @@ require_once __DIR__.'\sistema\BLL\citaciones.php';
 $apoderados=json_decode(listarApoderados());
 $alumnos=json_decode(listarAlumnos());
 $estado_citaciones=json_decode(listarEstadosCitacion());
+session_start();
+    if (isset($_SESSION['alerta_modal'])) {
+        echo $_SESSION['alerta_modal'];
+        unset($_SESSION['alerta_modal']); // Mostrar solo una vez
+    }
 
-if(isset($_SESSION["alerta_modal"])){
-    echo $_SESSION["alerta_modal"];
-}
+
 
 ?>
 

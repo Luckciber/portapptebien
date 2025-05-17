@@ -184,6 +184,7 @@
                                             <th>F. creación</th>
                                             <th>Profesor</th>
                                             <th>Rut de Alumno</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -194,6 +195,7 @@
                                             <th>F. creación</th>
                                             <th>Profesor</th>
                                             <th>Rut de Alumno</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
