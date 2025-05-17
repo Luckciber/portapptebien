@@ -7,9 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $rutalumno = $_POST['rutalumno'];
         $rutapoderado = $_POST['rutapoderado'];
         $fechacitacion = $_POST['fechacitacion'];
-        $fechacreacion = $_POST['fechacreacion'];
+        $fechacreacion = $_POST['creationDate'];
         $motivo = $_POST['motivo'];
-        agregarCitacion($rutalumno, $rutapoderado, $fechacitacion, $fechacreacion, $motivo);
+        $estado = $_POST['estado'];
+        agregarCitacion($rutalumno, $rutapoderado, $fechacreacion, $motivo, $fechacitacion, $estado);
     }
 }
 
@@ -76,22 +77,21 @@ function actualizarDatosCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_
     return $citacionesService->actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
 }
 
-function agregarCitacion($rutalumno, $rutapoderado, $fechacitacion, $fechacreacion, $motivo) {
+function agregarCitacion($rutalumno, $rutapoderado, $fecha_creacion, $motivo, $fechacitacion, $estado) {
     global $pdo;
     $citacionesService = new CitacionesService($pdo);
     $id_usuario = 17107688;//$_SESSION['id_usuario'];
-
+    $fechacreacion = date('Y-m-d', strtotime($fecha_creacion));
     $siguiente_cita = $citacionesService->obtenerUltimaCitacion();
     $numero = explode('CT',$siguiente_cita['id_citacion']);
     $numeroInt = (int)$numero[1] + 1;
-    $largo = strlen((string)$numero);
     $nuevoNumero = str_pad($numeroInt, 4, "0", STR_PAD_LEFT);
     $siguiente_cita = "CT". $nuevoNumero;
     
-    $resultado = $citacionesService->agregarCitacion($siguiente_cita, $rutalumno, $rutapoderado, $id_usuario, $fechacreacion, $motivo, $fechacitacion);
+    $resultado = $citacionesService->agregarCitacion($siguiente_cita, $rutalumno, $rutapoderado, $id_usuario, $fechacreacion, $motivo, $fechacitacion, $estado);
     
     if ($resultado) {
-        $_SESSION['alerta_modal'] = '
+        $_SESSION["alerta_modal"] = '
                 <div class="modal show" tabindex="-1" style="display:block; background:rgba(0,0,0,0.5)">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -110,7 +110,7 @@ function agregarCitacion($rutalumno, $rutapoderado, $fechacitacion, $fechacreaci
                 </div>';
             header('Location: ../../crear-citaciones.php');
     } else {
-        $_SESSION['alerta_modal'] = '
+        $_SESSION["alerta_modal"] = '
                 <div class="modal show" tabindex="-1" style="display:block; background:rgba(0,0,0,0.5)">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -134,7 +134,7 @@ function agregarCitacion($rutalumno, $rutapoderado, $fechacitacion, $fechacreaci
 function listarEstadosCitacion() {
     global $pdo;
     $citacionesService = new CitacionesService($pdo);
-    return $citacionesService->listarEstadosCitacion();
+    return json_encode($citacionesService->listarEstadosCitacion());
 }
 
 

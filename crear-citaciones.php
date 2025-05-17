@@ -1,8 +1,15 @@
 <?php
 require_once __DIR__.'\sistema\BLL\apoderados.php';
 require_once __DIR__.'\sistema\BLL\alumnos.php';
+require_once __DIR__.'\sistema\BLL\citaciones.php';
 $apoderados=json_decode(listarApoderados());
 $alumnos=json_decode(listarAlumnos());
+$estado_citaciones=json_decode(listarEstadosCitacion());
+
+if(isset($_SESSION["alerta_modal"])){
+    echo $_SESSION["alerta_modal"];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -259,7 +266,7 @@ $alumnos=json_decode(listarAlumnos());
                                                 <label for="nombre" class="col-form-label">Apoderado: </label>
                                             </div>
                                             <div class="col-7">
-                                                <input class="form-control" list="datalistOptions" name="rutapoderado" id="rutapoderado" placeholder="Type to search...">
+                                                <input type="text" class="form-control" list="datalistOptions" name="rutapoderado" id="rutapoderado" placeholder="Type to search...">
                                                 <datalist id="datalistOptions">
                                                     <?php
                                                         foreach ($apoderados as $apoderado) {
@@ -274,7 +281,7 @@ $alumnos=json_decode(listarAlumnos());
                                                 <label for="asignatura" id="nombreapoderado" name="nombreapoderado" class="col-form-label">Nombre Apoderado: </label>
                                             </div>
                                             <div class="col-7">
-                                                <input class="form-control" list="datalistAumnos" name="rutalumno" id="rutalumno" placeholder="Type to search...">
+                                                <input type="text" class="form-control" list="datalistAumnos" name="rutalumno" id="rutalumno" placeholder="Type to search...">
                                                 <datalist id="datalistAumnos">
                                                     <?php
                                                         foreach ($alumnos as $alumno) {
@@ -289,7 +296,7 @@ $alumnos=json_decode(listarAlumnos());
                                                 <label for="creationDate" class="col-form-label">Fecha creacion:</label>
                                             </div>
                                             <div class="col-7">
-                                                <input type="date" id="creationDate" name="fechacreacion" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+                                                <input type="date" id="creationDate" name="creationDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="row g-3 align-items-center pb-2">
@@ -305,12 +312,10 @@ $alumnos=json_decode(listarAlumnos());
                                                 <label for="nombre" class="col-form-label">Estado:</label>
                                             </div>
                                             <div class="col-7">
-                                            <select class="custom-select" id="inputGroupSelect01">
+                                            <select class="custom-select" name="estado" id="estado">
                                                 <?php
-                                                    $estados = json_decode(listarEstadosCitacion());
-                                                    var_dump($estados);
                                                     echo '<option selected>Seleccione...</option>';
-                                                    foreach ($estados as $estado) {
+                                                    foreach ($estado_citaciones as $estado) {
                                                         echo "<option value='".$estado->id."'>".$estado->descripcion."</option>";
                                                     }
                                                 ?>
@@ -322,7 +327,7 @@ $alumnos=json_decode(listarAlumnos());
                                                 <label for="inputPassword6" class="col-form-label">Motivo:</label>
                                             </div>
                                             <div class="col-7">
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" name="motivo" rows="3" name="motivo"></textarea>
+                                                <textarea class="form-control" id="motivo" name="motivo" rows="3"></textarea>
                                             </div>
                                         </div>
                                         <div class="d-grid gap-4 d-md-block pb-2">

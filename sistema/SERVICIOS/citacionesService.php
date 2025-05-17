@@ -10,8 +10,8 @@ class CitacionesService implements ICitacion {
         $this->citacionesDao = new CitacionesDao($pdo);
     }
 
-    public function agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion, $siguiente_cita) {
-        return $this->citacionesDao->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion, $siguiente_cita);
+    public function agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion, $siguiente_cita, $estado) {
+        return $this->citacionesDao->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion, $siguiente_cita, $estado);
     }
 
     public function listarCitaciones() {
@@ -30,8 +30,8 @@ class CitacionesService implements ICitacion {
         return $this->citacionesDao->listarCitacionesPorAlumno($rut_alumno);
     }
 
-    public function actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
-        return $this->citacionesDao->actualizarCitacion($id_citacion, $rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
+    public function actualizarCitacion($siguiente_cita, $rutalumno, $rutapoderado, $id_usuario, $fechacreacion, $motivo, $fechacitacion) {
+        return $this->citacionesDao->actualizarCitacion($siguiente_cita, $rutalumno, $rutapoderado, $id_usuario, $fechacreacion, $motivo, $fechacitacion);
     }
 
     public function obtenerUltimaCitacion() {

@@ -1,6 +1,6 @@
 <?php
 interface ICitacion {
-    public function agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion, $siguiente_cita);
+    public function agregarCitacion($siguiente_cita, $rutalumno, $rutapoderado, $id_usuario, $fechacreacion, $motivo, $fechacitacion, $estado);
     public function listarCitaciones();
     public function eliminarCitacion($id_citacion);
     public function obtenerCitacion($id_citacion);

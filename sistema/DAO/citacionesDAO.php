@@ -6,16 +6,18 @@ class CitacionesDao {
         $this->pdo = $pdo;
     }
 
-    public function agregarCitacion($siguiente_cita, $fecha_creacion,$rut_alumno, $id_usuario, $fecha_citacion,$motivo ) {
-        $sql = "INSERT INTO citaciones (id_citacion, rut_alumno, id_usuario, fecha_creacion, motivo, fecha_citacion) VALUES (:siguiente_cita, :rut_alumno, :id_usuario, :fecha_creacion, :motivo, :fecha_citacion)";
+    public function agregarCitacion($siguiente_cita, $rutalumno, $rutapoderado, $id_usuario, $fechacreacion, $motivo, $fechacitacion, $estado) {
+        $sql = "INSERT INTO citaciones (id_citacion, rut_alumno, rut_apoderado, id_usuario, fecha_creacion, motivo, fecha_citacion, estado) VALUES (:siguiente_cita, :rut_alumno, :rut_apoderado, :id_usuario, :fecha_creacion, :motivo, :fecha_citacion,:estado)";
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':siguiente_cita', $siguiente_cita);
-            $stmt->bindParam(':rut_alumno', $rut_alumno);
+            $stmt->bindParam(':rut_alumno', $rutalumno);
+            $stmt->bindParam(':rut_apoderado', $rutapoderado);
             $stmt->bindParam(':id_usuario', $id_usuario);
-            $stmt->bindParam(':fecha_creacion', $fecha_creacion);
+            $stmt->bindParam(':fecha_creacion', $fechacreacion);
             $stmt->bindParam(':motivo', $motivo);
-            $stmt->bindParam(':fecha_citacion', $fecha_citacion);
+            $stmt->bindParam(':fecha_citacion', $fechacitacion);
+            $stmt->bindParam(':estado', $estado);
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error en agregarCitacion: " . $e->getMessage());
@@ -68,16 +70,17 @@ class CitacionesDao {
             return false;
         }
     }
-    public function actualizarCitacion($id_citacion, $rut_alumno, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
-        $sql = "UPDATE citaciones SET rut_alumno = :rut_alumno, id_usuario = :id_usuario, fecha_creacion = :fecha_creacion, motivo = :motivo, fecha_citacion = :fecha_citacion WHERE id_citacion = :id_citacion";
+    public function actualizarCitacion($siguiente_cita, $rutalumno, $rutapoderado, $id_usuario, $fechacreacion, $motivo, $fechacitacion) {
+        $sql = "UPDATE citaciones SET rut_alumno = :rut_alumno, rut_apoderado = :rut_apoderado id_usuario = :id_usuario, fecha_creacion = :fecha_creacion, motivo = :motivo, fecha_citacion = :fecha_citacion WHERE id_citacion = :id_citacion";
         try {
             $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':id_citacion', $id_citacion);
-            $stmt->bindParam(':rut_alumno', $rut_alumno);
+            $stmt->bindParam(':id_citacion', $siguiente_cita);
+            $stmt->bindParam(':rut_alumno', $rutalumno);
             $stmt->bindParam(':id_usuario', $id_usuario);
-            $stmt->bindParam(':fecha_creacion', $fecha_creacion);
+            $stmt->bindParam(':rut_apoderado', $rutapoderado);
+            $stmt->bindParam(':fecha_creacion', $fechacreacion);
             $stmt->bindParam(':motivo', $motivo);
-            $stmt->bindParam(':fecha_citacion', $fecha_citacion);
+            $stmt->bindParam(':fecha_citacion', $fechacitacion);
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error en actualizarCitacion: " . $e->getMessage());
@@ -86,7 +89,7 @@ class CitacionesDao {
     }
 
     public function obtenerUltimaCitacion() {
-        $sql = "SELECT id_citacion FROM citaciones ORDER BY fecha_creacion DESC LIMIT 1";
+        $sql = "SELECT id_citacion FROM citaciones ORDER BY id_citacion DESC LIMIT 1";
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();

@@ -1,7 +1,8 @@
 <?php
+    include __DIR__.'\..\conexion.php';
     function listarApoderados(){
         require_once __DIR__.'\..\SERVICIOS\apoderadosService.php';
-        session_start();
+        global $pdo;
         $apoderadosService = new ApoderadosService($pdo);
         $allApoderados = $apoderadosService->listarApoderados();
         
