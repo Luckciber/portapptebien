@@ -47,4 +47,16 @@ function actualizarDatosAnotacion($id_anotacion, $anotacion, $es_positiva) {
     $anotacionesService = new AnotacionesService($pdo);
     return $anotacionesService->actualizarAnotacion($id_anotacion, $anotacion, $es_positiva);
 }
+
+
+function indicadorAnotaciones() {
+    global $pdo;
+    $anotacionesService = new AnotacionesService($pdo);
+    $anotaciones = $anotacionesService->indicadorAnotaciones();
+    if ($anotaciones) {
+        return json_encode($anotaciones);
+    } else {
+        return json_encode(array("error" => "No se encontraron anotaciones"));
+    }
+}
 ?>

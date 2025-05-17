@@ -1,4 +1,12 @@
-    <!DOCTYPE html>
+<?php
+    require 'sistema/conexion.php';
+    require_once 'sistema/BLL/anotaciones.php';
+     
+    $indicadores = json_decode(indicadorAnotaciones());
+
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -29,8 +37,7 @@
     <div id="wrapper">
 
     <?php require_once 'menu.php'; 
-    require 'sistema/conexion.php';
-    require_once 'sistema/BLL/anotaciones.php';
+
 
     $anotacionesJSON = obtenerTodasLasAnotaciones();
     $anotaciones = json_decode($anotacionesJSON, true);
@@ -127,7 +134,24 @@
                     </div>
 
                     <div class="row">
-
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Anotaciones Totales</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $indicadores->anotaciones_totales ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Earnings (Annual) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
@@ -136,7 +160,9 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Anotaciones Positivas</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $indicadores->anotaciones_positivas ?>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-check fa-2x text-gray-300"></i>
@@ -156,7 +182,7 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">2</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $indicadores->anotaciones_negativas ?></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -184,7 +210,6 @@
                                             <th>F. creación</th>
                                             <th>Profesor</th>
                                             <th>Rut de Alumno</th>
-                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -195,7 +220,6 @@
                                             <th>F. creación</th>
                                             <th>Profesor</th>
                                             <th>Rut de Alumno</th>
-                                            <th>Acciones</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>

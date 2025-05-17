@@ -107,6 +107,21 @@ class AnotacionesDAO {
         }
     }
 
+    public function indicadorAnotaciones() {
+        $sql = "SELECT(
+                    SELECT COUNT(*) AS total_anotaciones FROM anotaciones) AS anotaciones_totales,
+                    (SELECT COUNT(*) FROM anotaciones WHERE es_positiva = 1) AS anotaciones_positivas,
+                    (SELECT COUNT(*) FROM anotaciones WHERE es_positiva = 0) AS anotaciones_negativas";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en indicadorAnotaciones: " . $e->getMessage());
+            return false;
+        }
+    }   
+
 
 }
 
