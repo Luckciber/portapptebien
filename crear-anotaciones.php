@@ -1,3 +1,15 @@
+<?php
+require_once __DIR__.'\sistema\BLL\apoderados.php';
+require_once __DIR__.'\sistema\BLL\alumnos.php';
+require_once __DIR__.'\sistema\BLL\anotaciones.php';
+$apoderados=json_decode(listarApoderados());
+$alumnos=json_decode(listarAlumnos());
+
+if(isset($_SESSION["alerta_modal"])){
+    echo $_SESSION["alerta_modal"];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,14 +55,9 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        
-
                         <div class="topbar-divider d-none d-sm-block"></div>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -81,101 +88,85 @@
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                
+
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Crear una nueva anotación</h1>
-                    
+
                     <div class="row pb-2">
-                        <div class="<div class="col-sm-6">
+                        <div class="col-lg-5">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Registro de anotación</h6>
                                 </div>
                                 <div class="card-body">
-                                    <form method="post">
-                                        <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="nombre" class="col-form-label">Nombre Alumno: </label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text" id="name" class="form-control" aria-describedby="passwordHelpInline">
-                                            </div>
-                                        </div>
-                                        <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="inputPassword6" class="col-form-label">Rut del Alumno: </label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                    <form action="sistema/BLL/anotaciones.php" method="post">
+                                        <div class="mb-3 row">
+                                            <label for="alumno" class="col-sm-4 col-form-label">Alumno:</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" list="datalistOptions" name="alumno" id="alumno" placeholder="Buscar alumno...">
+                                                <datalist id="datalistOptions">
+                                                    <?php foreach ($alumnos as $alumno) {
+                                                        echo "<option value='" . $alumno->rut . "'>" . $alumno->nombre . " " . $alumno->apellido_paterno . "</option>";
+                                                    } ?>
+                                                </datalist>
                                             </div>
                                         </div>
-                                        <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="curso" class="col-form-label">Curso: </label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                        <div class="mb-3 row">
+                                            <label for="fecha" class="col-sm-4 col-form-label">Fecha:</label>
+                                            <div class="col-sm-8">
+                                                <input type="date" id="fecha" name="fecha" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="inputPassword6" class="col-form-label">Fecha: </label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="date" id="date" class="form-control" aria-describedby="passwordHelpInline">
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-4 col-form-label">Tipo de anotación:</label>
+                                            <div class="col-sm-8 d-flex align-items-center">
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="radio" name="tipo" id="positiva" value="0" checked>
+                                                    <label class="form-check-label" for="positiva">
+                                                        Positiva 
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="tipo" id="negativa" value="1">
+                                                    <label class="form-check-label" for="negativa">
+                                                        Negativa 
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="asignatura" class="col-form-label">Asignatura: </label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
-                                            </div>
-                                        </div>
-                                        <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off" checked>
-                                        <label class="btn" for="option5">Anotación positiva</label>
-
-                                        <input type="radio" class="btn-check" name="options-base" id="option6" autocomplete="off">
-                                        <label class="btn" for="option6">Anotación negativa</label>
-                                        <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="inputPassword6" class="col-form-label">Descripción: </label>
-                                            </div>
-                                            <div class="col-7">
-                                            <select class="form-control" aria-label="Default select example">
-                                                <option selected>Selecciona una opción</option>
+                                        <div class="mb-3 row">
+                                            <label for="descripcion" class="col-sm-4 col-form-label">Descripción:</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" name="descripcion" id="descripcion">
+                                                    <option selected disabled>Selecciona una opción</option>
                                                     <option value="disciplinaria">Disciplinaria</option>
                                                     <option value="academica">Académica</option>
                                                     <option value="convivencia">Convivencia</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="asignatura" class="col-form-label">Apoderado: </label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                        <div class="mb-3 row">
+                                            <label for="anotacion" class="col-sm-4 col-form-label">Anotación:</label>
+                                            <div class="col-sm-8">
+                                                <textarea class="form-control" id="anotacion" name="anotacion" rows="3"></textarea>
                                             </div>
                                         </div>
-                                        <div class="d-grid gap-3 d-md-block pb-2">
-                                            <button class="btn btn-primary" type="button">Guardar Anotación</button>
-                                            <button class="btn btn-secondary" type="button">Cancelar Anotación</button>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-primary me-2" type="submit">Guardar Anotación</button>
+                                            <button class="btn btn-secondary" type="reset">Cancelar</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <h1 class="h3 mb-4 text-gray-800 Crear nueva anotacion positiva"></h1>
+                    </div>
+
                 </div>
                 <!-- /.container-fluid -->
             </div>

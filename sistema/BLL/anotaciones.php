@@ -2,6 +2,22 @@
 require_once __DIR__.'\..\SERVICIOS\anotacionesService.php';
 require_once __DIR__.'\..\conexion.php';
 
+session_start();
+$id_del_usuario_logueado = isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : null;
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['guardar_anotacion'])) {
+        $alumno = $_POST['alumno'];
+        $fecha = $_POST['fecha'];
+        $es_positiva = $_POST['es_positiva'];
+        $es_positiva_int = (int)$es_positiva;
+        $anotacion = $_POST['anotacion'];
+        $id_del_usuario_logueado = $_SESSION['usuario_id'];
+        agregarAnotacion($alumno, $fecha, $anotacion, $es_positiva_int, $id_del_usuario_logueado);
+    }
+}
+
 function agregarNuevaAnotacion($id_alumno, $id_usuario, $fecha_creacion, $anotacion, $es_positiva) {
     global $pdo;
     $anotacionesService = new AnotacionesService($pdo);
