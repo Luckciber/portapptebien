@@ -1,3 +1,17 @@
+<?php
+require_once __DIR__.'\sistema\BLL\apoderados.php';
+require_once __DIR__.'\sistema\BLL\alumnos.php';
+require_once __DIR__.'\sistema\BLL\citaciones.php';
+$apoderados=json_decode(listarApoderados());
+$alumnos=json_decode(listarAlumnos());
+$estado_citaciones=json_decode(listarEstadosCitacion());
+
+if(isset($_SESSION["alerta_modal"])){
+    echo $_SESSION["alerta_modal"];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,20 +56,6 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -246,43 +246,42 @@
                     <h1 class="h3 mb-4 text-gray-800">Crear una nueva citacion</h1>
                     
                     <div class="row pb-2">
-                        <div class="<div class="col-sm-6">
+                        <div class="col-sm-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Registro de citaciones</h6>
                                 </div>
                                 <div class="card-body">
-                                    <form method="post">
-                                    <div class="row g-3 align-items-center pb-2">
+                                    <form method="post" action="sistema/BLL/citaciones.php">
+
+                                        <div class="row g-3 align-items-center pb-2">
                                             <div class="col-5">
-                                                <label for="inputPassword6" class="col-form-label">Rut del Alumno: </label>
+                                                <label for="nombre" class="col-form-label">Apoderado: </label>
                                             </div>
                                             <div class="col-7">
-                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                                <input type="text" class="form-control" list="datalistOptions" name="rutapoderado" id="rutapoderado" placeholder="Type to search...">
+                                                <datalist id="datalistOptions">
+                                                    <?php
+                                                        foreach ($apoderados as $apoderado) {
+                                                            echo "<option value='".$apoderado->rut."'>".$apoderado->nombre." ".$apoderado->apellido_paterno."</option>";
+                                                        }
+                                                    ?>
+                                                </datalist>
                                             </div>
                                         </div>
                                         <div class="row g-3 align-items-center pb-2">
                                             <div class="col-5">
-                                                <label for="nombre" class="col-form-label">Nombre Alumno: </label>
+                                                <label for="asignatura" id="nombreapoderado" name="nombreapoderado" class="col-form-label">Nombre Apoderado: </label>
                                             </div>
                                             <div class="col-7">
-                                                <input type="text" id="name" class="form-control" aria-describedby="passwordHelpInline">
-                                            </div>
-                                        </div>
-                                        <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="asignatura" class="col-form-label">Nombre Apoderado: </label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
-                                            </div>
-                                        </div>
-                                        <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="curso" class="col-form-label">Curso: </label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                                <input type="text" class="form-control" list="datalistAumnos" name="rutalumno" id="rutalumno" placeholder="Type to search...">
+                                                <datalist id="datalistAumnos">
+                                                    <?php
+                                                        foreach ($alumnos as $alumno) {
+                                                            echo "<option value='".$alumno->rut."'>".$alumno->nombre." ".$alumno->apellido_paterno."</option>";
+                                                        }
+                                                    ?>
+                                                </datalist>
                                             </div>
                                         </div>
                                         <div class="row g-3 align-items-center pb-2">
@@ -290,7 +289,7 @@
                                                 <label for="creationDate" class="col-form-label">Fecha creacion:</label>
                                             </div>
                                             <div class="col-7">
-                                                <input type="date" id="creationDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+                                                <input type="date" id="creationDate" name="creationDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="row g-3 align-items-center pb-2">
@@ -298,25 +297,36 @@
                                                 <label for="inputPassword6" class="col-form-label">Fecha citacion:</label>
                                             </div>
                                             <div class="col-7">
-                                                <input type="date" id="date" class="form-control" aria-describedby="passwordHelpInline">
+                                                <input type="date" id="date" name="fechacitacion" class="form-control" aria-describedby="passwordHelpInline">
                                             </div>
                                         </div>
                                         <div class="row g-3 align-items-center pb-2">
-                                        <div class="input-group-prepend col-5">
-                                            <label for="nombre" class="col-form-label">Estado:</label>
+                                            <div class="input-group-prepend col-5">
+                                                <label for="nombre" class="col-form-label">Estado:</label>
+                                            </div>
+                                            <div class="col-7">
+                                            <select class="custom-select" name="estado" id="estado">
+                                                <?php
+                                                    echo '<option selected>Seleccione...</option>';
+                                                    foreach ($estado_citaciones as $estado) {
+                                                        echo "<option value='".$estado->id."'>".$estado->descripcion."</option>";
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="col-7">
-                                           <select class="custom-select" id="inputGroupSelect01">
-                                                <option selected>Seleccione...</option>
-                                                <option value="1">Pendiente</option>
-                                                <option value="2">Confirmada</option>
-                                            </select>
-                                        </div>
+                                        <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="inputPassword6" class="col-form-label">Motivo:</label>
+                                            </div>
+                                            <div class="col-7">
+                                                <textarea class="form-control" id="motivo" name="motivo" rows="3"></textarea>
+                                            </div>
                                         </div>
                                         <div class="d-grid gap-4 d-md-block pb-2">
-                                            <button class="btn btn-primary" type="button">Guardar Citacion</button>
-                                            <button class="btn btn-secondary" type="button">Cancelar Citacion</button>
-                                        </div>
+                                            <button class="btn btn-primary" type="submit" name="guardar_citacion">Guardar Citacion</button>
+                                            <a href="crear-citaciones.php" class="btn btn-secondary" type="button">Cancelar Citacion</a>
+                                        </div> 
                                     </form>
                                 </div>
                             </div>
