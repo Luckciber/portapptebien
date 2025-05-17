@@ -216,6 +216,7 @@
                                                 <th>Fecha Creación</th>
                                                 <th>Motivo</th>
                                                 <th>Fecha Citación</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -227,6 +228,7 @@
                                                 <th>Fecha Creación</th>
                                                 <th>Motivo</th>
                                                 <th>Fecha Citación</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -241,6 +243,14 @@
                                                     echo "<td>" . htmlspecialchars($citacion['fecha_creacion']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($citacion['motivo']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($citacion['fecha_citacion']) . "</td>";
+                                                    echo "<td>
+                                                            <form method='POST' action='sistema/BLL/notificacion.php'>
+                                                                <button type='submit' class='btn btn-primary' name='notificar' value='" . htmlspecialchars($citacion['rut_apoderado']) . "'>
+                                                                    <i class='fas fa-envelop'></i> Enviar Notificación
+                                                                </button>
+
+                                                            </form>  
+                                                        </td>";
                                                     echo "</tr>";
                                                 }
                                             } else {

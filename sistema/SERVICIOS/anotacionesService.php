@@ -33,5 +33,9 @@ class AnotacionesService implements IAnotaciones{
     public function actualizarAnotacion($id_anotacion, $anotacion, $es_positiva) {
         return $this->anotacionesDao->actualizarAnotacion($id_anotacion, $anotacion, $es_positiva);
     }
+
+    public function indicadorAnotaciones() {
+        return $this->anotacionesDao->indicadorAnotaciones();
+    }
 }
 ?>

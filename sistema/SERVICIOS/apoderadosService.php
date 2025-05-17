@@ -14,6 +14,9 @@
         public function listarApoderados() {
             return $this->apoderadosDao->listarApoderados();
         }
+        public function obtenerApoderado($rut) {
+            return $this->apoderadosDao->obtenerApoderado($rut);
+        }
     }
 
 ?>

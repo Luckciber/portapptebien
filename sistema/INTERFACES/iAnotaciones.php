@@ -5,5 +5,6 @@ interface IAnotaciones{
     public function eliminarAnotacion($id_anotacion);
     public function obtenerAnotacion($id_anotacion);
     public function actualizarAnotacion($id_anotacion, $anotacion, $es_positiva);
+    public function indicadorAnotaciones();
 }
 ?>

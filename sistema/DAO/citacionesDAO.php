@@ -24,6 +24,18 @@ class CitacionesDao {
             return false;
         }
     }
+
+    public function obtenerTodasLasCitaciones() {
+        $sql = "SELECT * FROM citaciones";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en obtenerTodasLasCitaciones: " . $e->getMessage());
+            return false;
+        }
+    }
     public function listarCitaciones() {
         $sql = "SELECT * FROM citaciones ORDER BY fecha_creacion DESC";
         try {

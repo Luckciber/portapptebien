@@ -41,5 +41,9 @@ class CitacionesService implements ICitacion {
     public function listarEstadosCitacion() {
         return $this->citacionesDao->listarEstadosCitacion();
     }
+
+    public function obtenerTodasLasCitaciones() {
+        return $this->citacionesDao->obtenerTodasLasCitaciones();
+    }
 }
 ?>

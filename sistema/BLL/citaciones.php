@@ -14,12 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-
-function agregarNuevaCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
-    global $pdo;
-    $citacionesService = new CitacionesService($pdo);
-    return $citacionesService->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion, $estado=1);
-}
 function listarCitaciones() {
     require_once __DIR__ . '/../DAO/citacionesDAO.php';
     session_start();
@@ -43,6 +37,18 @@ function obtenerCitacionPorId($id_citacion) {
     global $pdo;
     $citacionesService = new CitacionesService($pdo);
     return $citacionesService->obtenerCitacion($id_citacion);
+}
+
+function obtenerTodasLasCitaciones() {
+    global $pdo;
+    $citacionesService = new CitacionesService($pdo);
+    $citaciones = $citacionesService->obtenerTodasLasCitaciones();
+        
+    if($citaciones) {
+        return json_encode($citaciones);
+    } else {
+        return json_encode(array("error" => "No se encontraron resultados."));
+    }
 }
 
 function obtenerCitacionesPorAlumno($rut_alumno) {
@@ -74,40 +80,40 @@ function agregarCitacion($rutalumno, $rutapoderado, $fecha_creacion, $motivo, $f
     $siguiente_cita = "CT". $nuevoNumero;
     
     $resultado = $citacionesService->agregarCitacion($siguiente_cita, $rutalumno, $rutapoderado, $id_usuario, $fechacreacion, $motivo, $fechacitacion, $estado);
-    
+    session_start();
     if ($resultado) {
-        $_SESSION["alerta_modal"] = '
+        $_SESSION['alerta_modal'] = '
                 <div class="modal show" tabindex="-1" style="display:block; background:rgba(0,0,0,0.5)">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Proceso realizado con éxito</h5>
-                                <a href="inventario.php" class="close">&times;</a>
+                                <a href="crear-citaciones.php" class="close">&times;</a>
                             </div>
                             <div class="modal-body">
                                 <p>Citacion Generada correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-success">OK</button>
+                                <a href="crear-citaciones.php" class="btn btn-success" data-bs-dismiss="modal">OK</a>
                             </div>
                         </div>
                     </div>
                 </div>';
             header('Location: ../../crear-citaciones.php');
     } else {
-        $_SESSION["alerta_modal"] = '
+        $_SESSION['alerta_modal'] = '
                 <div class="modal show" tabindex="-1" style="display:block; background:rgba(0,0,0,0.5)">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Proceso realizado con éxito</h5>
-                                <a href="inventario.php" class="close">&times;</a>
+                                <a href="crear-citaciones.php" class="close">&times;</a>
                             </div>
                             <div class="modal-body">
                                 <p>Ocurrio un error durante la creación de la citacion.</p>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-success">OK</button>
+                                <button class="btn btn-success" data-bs-dismiss="modal">OK</button>
                             </div>
                         </div>
                     </div>
