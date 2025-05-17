@@ -253,14 +253,7 @@ if(isset($_SESSION["alerta_modal"])){
                                 </div>
                                 <div class="card-body">
                                     <form method="post" action="sistema/BLL/citaciones.php">
-                                    <div class="row g-3 align-items-center pb-2">
-                                            <div class="col-5">
-                                                <label for="inputPassword6" class="col-form-label">Rut del Alumno: </label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
-                                            </div>
-                                        </div>
+
                                         <div class="row g-3 align-items-center pb-2">
                                             <div class="col-5">
                                                 <label for="nombre" class="col-form-label">Apoderado: </label>
@@ -331,8 +324,8 @@ if(isset($_SESSION["alerta_modal"])){
                                             </div>
                                         </div>
                                         <div class="d-grid gap-4 d-md-block pb-2">
-                                            <button class="btn btn-primary" type="submit" name="guardar">Guardar Citacion</button>
-                                            <button class="btn btn-secondary" type="button">Cancelar Citacion</button>
+                                            <button class="btn btn-primary" type="submit" name="guardar_citacion">Guardar Citacion</button>
+                                            <a href="crear-citaciones.php" class="btn btn-secondary" type="button">Cancelar Citacion</a>
                                         </div> 
                                     </form>
                                 </div>

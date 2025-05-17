@@ -18,22 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 function agregarNuevaCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
     global $pdo;
     $citacionesService = new CitacionesService($pdo);
-    return $citacionesService->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
-
-require_once __DIR__ . '/../conexion.php';    
-
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST["guardar"])) {
-        echo $_POST["nombreapoderado"];
-        crearCitacion();
-    }
-}
-
-function agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
-    require_once __DIR__ . '/../DAO/citacionesDAO.php';
-    session_start();
-    $citacionesDao = new CitacionesDao($pdo);
-    return $citacionesDao->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
+    return $citacionesService->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion, $estado=1);
 }
 function listarCitaciones() {
     require_once __DIR__ . '/../DAO/citacionesDAO.php';
@@ -136,8 +121,5 @@ function listarEstadosCitacion() {
     $citacionesService = new CitacionesService($pdo);
     return json_encode($citacionesService->listarEstadosCitacion());
 }
-
-
-
 
 ?>
