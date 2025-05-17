@@ -50,20 +50,6 @@ $alumnos=json_decode(listarAlumnos());
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -260,6 +246,14 @@ $alumnos=json_decode(listarAlumnos());
                                 </div>
                                 <div class="card-body">
                                     <form method="post" action="sistema/BLL/citaciones.php">
+                                    <div class="row g-3 align-items-center pb-2">
+                                            <div class="col-5">
+                                                <label for="inputPassword6" class="col-form-label">Rut del Alumno: </label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                            </div>
+                                        </div>
                                         <div class="row g-3 align-items-center pb-2">
                                             <div class="col-5">
                                                 <label for="nombre" class="col-form-label">Apoderado: </label>
@@ -277,7 +271,7 @@ $alumnos=json_decode(listarAlumnos());
                                         </div>
                                         <div class="row g-3 align-items-center pb-2">
                                             <div class="col-5">
-                                                <label for="inputPassword6" class="col-form-label">Alumno: </label>
+                                                <label for="asignatura" id="nombreapoderado" name="nombreapoderado" class="col-form-label">Nombre Apoderado: </label>
                                             </div>
                                             <div class="col-7">
                                                 <input class="form-control" list="datalistAumnos" name="rutalumno" id="rutalumno" placeholder="Type to search...">
@@ -332,7 +326,7 @@ $alumnos=json_decode(listarAlumnos());
                                             </div>
                                         </div>
                                         <div class="d-grid gap-4 d-md-block pb-2">
-                                            <button class="btn btn-primary" type="submit" name="guardar_citacion">Guardar Citacion</button>
+                                            <button class="btn btn-primary" type="submit" name="guardar">Guardar Citacion</button>
                                             <button class="btn btn-secondary" type="button">Cancelar Citacion</button>
                                         </div> 
                                     </form>

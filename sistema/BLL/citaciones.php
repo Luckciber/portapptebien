@@ -18,23 +18,39 @@ function agregarNuevaCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_c
     global $pdo;
     $citacionesService = new CitacionesService($pdo);
     return $citacionesService->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
-}
 
-function obtenerTodasLasCitaciones() {
-    global $pdo;
-    $citacionesService = new CitacionesService($pdo);
-    $citaciones = $citacionesService->listarCitaciones();
-    if ($citaciones) {
-        return json_encode($citaciones);
-    } else {
-        return json_encode(array("error" => "No se encontraron citaciones."));
+require_once __DIR__ . '/../conexion.php';    
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["guardar"])) {
+        echo $_POST["nombreapoderado"];
+        crearCitacion();
     }
 }
 
-function eliminarCitacionPorId($id_citacion) {
-    global $pdo;
-    $citacionesService = new CitacionesService($pdo);
-    return $citacionesService->eliminarCitacion($id_citacion);
+function agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion) {
+    require_once __DIR__ . '/../DAO/citacionesDAO.php';
+    session_start();
+    $citacionesDao = new CitacionesDao($pdo);
+    return $citacionesDao->agregarCitacion($rut_alumno, $rut_apoderado, $id_usuario, $fecha_creacion, $motivo, $fecha_citacion);
+}
+function listarCitaciones() {
+    require_once __DIR__ . '/../DAO/citacionesDAO.php';
+    session_start();
+    $citacionesDao = new CitacionesDao($pdo);
+    $allCitaciones = $citacionesDao->listarCitaciones();
+
+    if ($allCitaciones) {
+        return json_encode($allCitaciones);
+    } else {
+        return json_encode(array("error" => "No se encontraron resultados."));
+    }
+}
+function eliminarCitacion($id_citacion) {
+    require_once __DIR__ . '/../DAO/citacionesDAO.php';
+    session_start();
+    $citacionesDao = new CitacionesDao($pdo);
+    return $citacionesDao->eliminarCitacion($id_citacion);
 }
 
 function obtenerCitacionPorId($id_citacion) {
