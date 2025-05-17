@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = isset($_POST['password']) ? trim($_POST['password']) : '';
     $loginService = new LoginService($pdo);
     $validarUsuario = $loginService->login($usuario, $password);
+    $_SESSION['usuario_id'] = $_POST['usuario'];
 
     if ($validarUsuario) {
         header('Location: ../../dashboard.php');

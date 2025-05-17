@@ -5,10 +5,10 @@ require_once __DIR__.'\sistema\BLL\anotaciones.php';
 $apoderados=json_decode(listarApoderados());
 $alumnos=json_decode(listarAlumnos());
 
-if(isset($_SESSION["alerta_modal"])){
-    echo $_SESSION["alerta_modal"];
-}
-
+    if (isset($_SESSION['alerta_modal'])) {
+        echo $_SESSION['alerta_modal'];
+        unset($_SESSION['alerta_modal']); // Mostrar solo una vez
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,15 +127,9 @@ if(isset($_SESSION["alerta_modal"])){
                                             <label class="col-sm-4 col-form-label">Tipo de anotación:</label>
                                             <div class="col-sm-8 d-flex align-items-center">
                                                 <div class="form-check me-3">
-                                                    <input class="form-check-input" type="radio" name="tipo" id="positiva" value="0" checked>
+                                                    <input class="form-check-input" type="checkbox" name="es_positiva" id="es_positiva" checked>
                                                     <label class="form-check-label" for="positiva">
-                                                        Positiva 
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="tipo" id="negativa" value="1">
-                                                    <label class="form-check-label" for="negativa">
-                                                        Negativa 
+                                                        Es Positiva? 
                                                     </label>
                                                 </div>
                                             </div>
@@ -158,7 +152,7 @@ if(isset($_SESSION["alerta_modal"])){
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-end">
-                                            <button class="btn btn-primary me-2" type="submit">Guardar Anotación</button>
+                                            <button class="btn btn-primary me-2" type="submit" name="guardar_anotacion">Guardar Anotación</button>
                                             <button class="btn btn-secondary" type="reset">Cancelar</button>
                                         </div>
                                     </form>

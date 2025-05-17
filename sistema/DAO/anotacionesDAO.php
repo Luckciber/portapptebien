@@ -52,7 +52,11 @@ class AnotacionesDAO {
             $stmt->bindParam(':fecha_creacion', $fecha_creacion);
             $stmt->bindParam(':anotacion', $anotacion);
             $stmt->bindParam(':es_positiva', $es_positiva);
-            return $stmt->execute();
+            if( $stmt->execute() ){
+                return true;
+            }else{
+                return false;
+            }    
         } catch (PDOException $e) {
             error_log("Error en agregarAnotacion: " . $e->getMessage());
             return false;
